@@ -8,6 +8,7 @@ export default function weatherStats(props) {
         'pcloudy': '⛅️',
         'mcloudy': '⛅️',
         'rain': '🌧',
+        'shower': '🌧',
         'snow': '🌨',
         'thunderstorm': '🌩',
     }
