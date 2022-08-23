@@ -41,13 +41,13 @@ export default function weatherStats(props) {
         return style;
     }
 
-    const weatherElements = props.data.map(element => {
+    const weatherElements = props.data.map((element, index) => {
         return (
-            <div className="weatherStats--day">
+            <div className="weatherStats--day" key={index}>
                 <h4> {element.date}</h4>
                 <h1 className="weatherStats--type"> {element.weather ? weatherSymbols(element.weather) : ''}</h1>
                 <h5>  {element.wind} m/s </h5>
-                <h4 className="weatherStats--temp" style={checkTemp(element.temperature)}> {element.temperature}°C</h4>
+                <h4 className="weatherStats--temp" style={checkTemp(element.tempMax)}> {element.tempMax} / {element.tempMin} °C</h4>
             </div>
         )
     }

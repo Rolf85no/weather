@@ -28,7 +28,8 @@ export default function App() {
                     {
                         date: '',
                         weather: '',
-                        temperature: '',
+                        tempMax: '',
+                        tempMin: '',
                         wind: '',
                     }
                 ],
@@ -65,10 +66,11 @@ export default function App() {
     }
 
     const fixData = function (weatherData) {
+        console.log(weatherData);
         let weatherArray = []
         for (const [index, data] of weatherData.dataseries.entries()) {
             const dateString = index !== 0 ? String(data.date).replaceAll('2022', '') : 'Today';
-            let obj = { date: dateString, weather: data.weather, temperature: data.temp2m.max, wind: data.wind10m_max }
+            let obj = { date: dateString, weather: data.weather, tempMax: data.temp2m.max, tempMin: data.temp2m.min, wind: data.wind10m_max }
             weatherArray.push(obj);
         }
         return weatherArray
@@ -83,7 +85,7 @@ export default function App() {
     }
     return (
         <main>
-            <h1>Weather check</h1>
+            <h1 className="header">Weather check</h1>
             <form className="searchbar--form" onSubmit={handleSubmit}>
 
                 <input
