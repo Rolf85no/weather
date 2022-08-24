@@ -44,11 +44,13 @@ section{
 
 .header{
     font-family: 'Lato', sans-serif;
+    font-size: calc(1.25rem + 1vw);
     font-weight: 700;
-    text-shadow: 0em 1em 4px var(--header-shadow);
+    text-shadow: 0em 0.1em 4px var(--header-shadow);
     color: var(--text-color);
     margin: 0;
-    margin-bottom: 48px;
+    margin-top: 24px;
+    margin-bottom: 24px;
 }
 
 .searchbar--form{

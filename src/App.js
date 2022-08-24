@@ -4,14 +4,15 @@ import WeatherStats from './components/WeatherStats'
 export default function App() {
 
     const [darkMode, setDarkMode] = React.useState(false);
-    const [today, setToday] = React.useState(() => {
+    const [isLoading, setIsLoading] = React.useState(false);
+    const [today, setToday] = React.useState();
 
-    })
 
     React.useEffect(() => {
         const date = new Date();
         setToday(date.getDay() - 1);
     }, [])
+
 
     const [weatherInfo, setWeatherInfo] = React.useState(
         {
@@ -26,8 +27,6 @@ export default function App() {
             ],
         }
     )
-
-    const [isLoading, setIsLoading] = React.useState(false);
     const renderErrorMsg = function (message) {
         setIsLoading(false);
         const errorMsgEl = document.querySelector('.errMessage');
@@ -114,7 +113,7 @@ export default function App() {
     return (
         <main>
             <button className="toggleDark" onClick={toggleDarkMode}>🌞</button>
-            <h1 className="header">Weather check</h1>
+            <h1 className="header">How`s the Weather? ☁️</h1>
             <form className="searchbar--form" onSubmit={handleSubmit}>
 
                 <input
@@ -137,6 +136,7 @@ export default function App() {
             <WeatherStats
                 city={weatherInfo.city}
                 data={weatherInfo.data}
+                isLoading={isLoading}
             />
             <Footer />
         </main>
