@@ -2,6 +2,8 @@ import React from 'react'
 import Footer from './components/Footer'
 import WeatherStats from './components/WeatherStats'
 export default function App() {
+
+    const [darkMode, setDarkMode] = React.useState(false);
     const [weatherInfo, setWeatherInfo] = React.useState(
         {
             'city': '',
@@ -66,7 +68,6 @@ export default function App() {
     }
 
     const fixData = function (weatherData) {
-        console.log(weatherData);
         let weatherArray = []
         for (const [index, data] of weatherData.dataseries.entries()) {
             const dateString = index !== 0 ? String(data.date).replaceAll('2022', '') : 'Today';
@@ -83,8 +84,26 @@ export default function App() {
         errorMsgEl.classList.add('hidden');
         getWeather(city.value.toLowerCase());
     }
+
+    const toggleDarkMode = function () {
+        const toggleButtonEl = document.querySelector('.toggleDark');
+        if (!darkMode) {
+            document.documentElement.setAttribute('theme', 'dark');
+            toggleButtonEl.textContent = '🌚'
+            setDarkMode(true);
+
+        }
+        else {
+            document.documentElement.setAttribute('theme', 'light');
+            toggleButtonEl.textContent = '🌞';
+            setDarkMode(false);
+        }
+
+    }
+
     return (
         <main>
+            <button className="toggleDark" onClick={toggleDarkMode}>🌞</button>
             <h1 className="header">Weather check</h1>
             <form className="searchbar--form" onSubmit={handleSubmit}>
 

@@ -4,8 +4,27 @@
     box-sizing: border-box;
 }
 
+:root{
+    --background-color: #ccf1fe;
+    --primary-color: #f9f9f9;
+    --secondary-color: red;
+    --text-color: #070606;
+    --shadow-color: #3c3d3f38;
+    --button-shadow: rgba(230, 216, 135, 0.628);
+    --header-shadow: rgba(32, 37, 38, 0.292);
+}
+
+[theme="dark"]{
+    --background-color:#070606;
+    --primary-color: #f9f9f9;
+    --secondary-color: rgb(248, 178, 178);
+    --text-color: #ccf1fe;
+    --shadow-color: #d7d9df38;
+    --button-shadow: #cbf1ff;
+    --header-shadow: rgba(156, 239, 238, 0.34);
+}
 body{
-    background-color: #ccf1fe;
+    background-color: var(--background-color);
 }
 
 main{
@@ -26,20 +45,20 @@ section{
 .header{
     font-family: 'Lato', sans-serif;
     font-weight: 700;
-    text-shadow: 0em 1em 4px rgba(32, 37, 38, 0.292);
-    color: #070606;
+    text-shadow: 0em 1em 4px var(--header-shadow);
+    color: var(--text-color);
     margin: 0;
     margin-bottom: 48px;
 }
 
 .searchbar--form{
-    background-color: #f9f9f9;
+    background-color:var(--primary-color);
     width: 100%;
     display: flex;
     justify-content: space-between;
     height: calc(2rem + 1vw);
     cursor: pointer;
-    box-shadow: #3c3d3f38 0px 2px 2px 0px;
+    box-shadow: var(--shadow-color) 0px 0px 0px 2px;
     border-radius: 10px;
 }
 .searchbar--input{
@@ -63,7 +82,7 @@ section{
 }
 
 .weatherStats{
-    background-color: #f9f9f9;
+    background-color:var(--primary-color);
     width:100%;
     margin-top: 24px;
     padding: 8px 0;
@@ -83,7 +102,7 @@ section{
 .errMessage{
     width: 80%;
     font-size: calc(0.70rem + 1vw);
-    color: #664300;
+    color: var(--secondary-color);
     margin: 8px auto;
     text-align: center;
 }
@@ -107,7 +126,30 @@ section{
 .weatherStats--day:last-child{
     box-shadow: none;
 }
+.footer{
+    color: var(--text-color);
+}
 
+
+
+.toggleDark{
+    background-color: var(--background-color);
+    color: var(--text-color);
+    width: calc(2em + 1vw);
+    height: calc(1.5rem + 1vw);
+    border-radius: 50%;
+    border: none;
+    box-shadow: var(--button-shadow) 2px 2px 2px 5px;
+    position: absolute;
+    top: 8px;
+    right: 5%;
+    cursor: pointer;
+}
+
+.toggleDark:active{
+    background-color: var(--text-color);
+    color:var(--background-color);
+}
 
 @media screen and (min-width: 600px) {
 
@@ -124,6 +166,11 @@ section{
         flex-direction: column;
         align-items: center;
         box-shadow: none;
+    }
+
+    .toggleDark:hover{
+        background-color: var(--button-shadow);
+        color:var(--background-color);
     }
 
     
