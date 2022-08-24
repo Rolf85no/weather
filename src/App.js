@@ -4,6 +4,15 @@ import WeatherStats from './components/WeatherStats'
 export default function App() {
 
     const [darkMode, setDarkMode] = React.useState(false);
+    const [today, setToday] = React.useState(() => {
+
+    })
+
+    React.useEffect(() => {
+        const date = new Date();
+        setToday(date.getDay() - 1);
+    }, [])
+
     const [weatherInfo, setWeatherInfo] = React.useState(
         {
             'city': '',
@@ -19,33 +28,18 @@ export default function App() {
     )
 
     const [isLoading, setIsLoading] = React.useState(false);
-
     const renderErrorMsg = function (message) {
         setIsLoading(false);
-        setWeatherInfo(prevWeatherInfo => {
-            return {
-                ...prevWeatherInfo,
-                city: '',
-                data: [
-                    {
-                        date: '',
-                        weather: '',
-                        tempMax: '',
-                        tempMin: '',
-                        wind: '',
-                    }
-                ],
-            }
-        })
         const errorMsgEl = document.querySelector('.errMessage');
         errorMsgEl.innerHTML = message;
         errorMsgEl.classList.remove('hidden');
     }
     const getWeather = async function (city) {
         try {
+            if (!city) throw new Error('Please type in a city')
             setIsLoading(true);
             const responseGeo = await fetch(`https://geocode.xyz/${city}?geoit=json`);
-            if (!responseGeo.ok) throw new Error('Too many requests or internet too slow')
+            if (!responseGeo.ok) throw new Error('Couldn`t connect with server, please wait and try again')
             const dataGeo = await responseGeo.json();
             if (dataGeo.error) throw new Error('Couldn`t find city')
             const latitude = await dataGeo.latt;
@@ -68,9 +62,25 @@ export default function App() {
     }
 
     const fixData = function (weatherData) {
+        const weekDays = [
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            'Friday',
+            'Saturday',
+            'Sunday'
+        ]
+
         let weatherArray = []
         for (const [index, data] of weatherData.dataseries.entries()) {
-            const dateString = index !== 0 ? String(data.date).replaceAll('2022', '') : 'Today';
+            let dateString = '';
+            if (index === 0) dateString = 'Today';
+            else if (index === 1) dateString = 'Tomorrow'
+            else {
+                let wkI = today + index;
+                wkI > 6 ? dateString = weekDays[wkI - weekDays.length] : dateString = weekDays[wkI]
+            }
             let obj = { date: dateString, weather: data.weather, tempMax: data.temp2m.max, tempMin: data.temp2m.min, wind: data.wind10m_max }
             weatherArray.push(obj);
         }

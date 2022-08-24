@@ -58,7 +58,7 @@ section{
     justify-content: space-between;
     height: calc(2rem + 1vw);
     cursor: pointer;
-    box-shadow: var(--shadow-color) 0px 0px 0px 2px;
+    box-shadow: var(--shadow-color) 0px 2px 2px 0px;
     border-radius: 10px;
 }
 .searchbar--input{
@@ -88,7 +88,7 @@ section{
     padding: 8px 0;
     border-radius: 10px;
     text-align: center;
-    box-shadow: #3c3d3f38 0px 2px 2px 0px;
+    box-shadow: var(--shadow-color) 0px 2px 2px 0px;
 }
 
 .weatherStats--type{
