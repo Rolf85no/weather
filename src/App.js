@@ -34,7 +34,7 @@ export default function App() {
         try {
             if (!city) throw new Error('Please type in a city')
             setIsLoading(true);
-            const responseGeo = await fetch(`http://api.positionstack.com/v1/forward?access_key=e5d639e3086bc35279673c05d706fcf8&query=${city}&limit=1&output=json`);
+            const responseGeo = await fetch(`http://api.positionstack.com/v1/forward?access_key=${process.env.REACT_APP_WEATHER_API_KEY}&query=${city}&limit=1&output=json`);
             if (!responseGeo.ok) throw new Error('Couldn`t connect with server, please wait and try again')
             const dataGeo = await responseGeo.json();
             if (dataGeo.error) throw new Error('Couldn`t find city')
