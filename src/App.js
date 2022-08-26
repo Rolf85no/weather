@@ -2,18 +2,9 @@ import React from 'react'
 import Footer from './components/Footer'
 import WeatherStats from './components/WeatherStats'
 export default function App() {
-
     const [darkMode, setDarkMode] = React.useState(false);
     const [isLoading, setIsLoading] = React.useState(false);
     const [today, setToday] = React.useState();
-
-
-    React.useEffect(() => {
-        const date = new Date();
-        setToday(date.getDay() - 1);
-    }, [])
-
-
     const [weatherInfo, setWeatherInfo] = React.useState(
         {
             'city': '',
@@ -27,6 +18,12 @@ export default function App() {
             ],
         }
     )
+
+    React.useEffect(() => {
+        const date = new Date();
+        setToday(date.getDay() - 1);
+    }, [])
+
     const renderErrorMsg = function (message) {
         setIsLoading(false);
         const errorMsgEl = document.querySelector('.errMessage');
@@ -37,12 +34,12 @@ export default function App() {
         try {
             if (!city) throw new Error('Please type in a city')
             setIsLoading(true);
-            const responseGeo = await fetch(`https://geocode.xyz/${city}?geoit=json`);
+            const responseGeo = await fetch(`http://api.positionstack.com/v1/forward?access_key=e5d639e3086bc35279673c05d706fcf8&query=${city}&limit=1&output=json`);
             if (!responseGeo.ok) throw new Error('Couldn`t connect with server, please wait and try again')
             const dataGeo = await responseGeo.json();
             if (dataGeo.error) throw new Error('Couldn`t find city')
-            const latitude = await dataGeo.latt;
-            const longitude = await dataGeo.longt;
+            const latitude = await dataGeo.data[0].latitude;
+            const longitude = await dataGeo.data[0].longitude;
             const weatherResponse = await fetch(`https://www.7timer.info/bin/civillight.php?lon=${longitude}&lat=${latitude}&ac=0&unit=metric&output=json&tzshift=0`);
             const weatherData = fixData(await weatherResponse.json());
 
@@ -109,6 +106,8 @@ export default function App() {
         }
 
     }
+
+
 
     return (
         <main>

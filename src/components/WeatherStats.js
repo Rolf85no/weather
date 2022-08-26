@@ -14,7 +14,7 @@ export default function weatherStats(props) {
     }
 
     function weatherSymbols(weatherString) {
-        let weather = '';
+        let weather = '😡';
         for (const [key, value] of Object.entries(weatherTypes)) {
             if (weatherString.includes(key)) weather = value;
         }
