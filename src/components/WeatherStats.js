@@ -46,8 +46,9 @@ export default function weatherStats(props) {
             <div className="weatherStats--day" key={index}>
                 <h4> {element.date}</h4>
                 <h1 className="weatherStats--type"> {element.weather ? weatherSymbols(element.weather) : ''}</h1>
-                <h5>  {element.wind} m/s </h5>
-                <h4 className="weatherStats--temp" style={checkTemp(element.tempMax)}> {element.tempMax} / {element.tempMin} °C</h4>
+                <h5 className="weatherStats--wind">  {element.wind} m/s </h5>
+                <h4 className="weatherStats--temp" style={checkTemp(element.tempMax)}> Max: {element.tempMax} °C</h4>
+                <h4 className="weatherStats--temp" style={checkTemp(element.tempMin)}> Min: {element.tempMin} °C</h4>
             </div>
         )
     }

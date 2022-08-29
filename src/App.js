@@ -107,20 +107,20 @@ export default function App() {
 
     }
 
-
-
     return (
         <main>
             <button className="toggleDark" onClick={toggleDarkMode}>🌞</button>
-            <h1 className="header">How`s the Weather? ☁️</h1>
+            <h1 className="header">7 day weather forecast ☁️</h1>
             <form className="searchbar--form" onSubmit={handleSubmit}>
-
+                <label htmlFor="city"> City:</label>
                 <input
                     className="searchbar--input"
                     type="text"
-                    placeholder="Type in city"
+                    name="city"
+                    id="city"
                 >
                 </input>
+
                 <button
                     className="searchbar--button"
                     type="submit"
@@ -131,7 +131,7 @@ export default function App() {
                 </button>
 
             </form>
-            <h3 className="errMessage hidden"></h3>
+            <h3 className="errMessage hidden">Error message</h3>
             <WeatherStats
                 city={weatherInfo.city}
                 data={weatherInfo.data}

@@ -53,6 +53,13 @@ section{
     margin-bottom: 24px;
 }
 
+label{
+    align-self: center;
+    margin-left: 10px;
+    font-size: 16px;
+    width: 15%;
+}
+
 .searchbar--form{
     background-color:var(--primary-color);
     width: 100%;
@@ -66,13 +73,9 @@ section{
 .searchbar--input{
     border: none;
     padding-left: 16px;
-    background-color: transparent;
     margin-left: 8px;
-    width: 80%;
-}
-
-.searchbar--input::placeholder{
-    text-align: left;
+    width: 60%;
+    font-size: 16px;
 }
 
 .searchbar--button{
@@ -119,10 +122,20 @@ section{
     0vh;
 }
 
+.weatherStats--wind{
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
 .weatherStats--type{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.weatherStats--temp{
+    margin: 8px 0;
+    font-size: 18px;
 }
 
 .weatherStats--day:last-child{
@@ -174,6 +187,11 @@ section{
     .toggleDark:hover{
         background-color: var(--button-shadow);
         color:var(--background-color);
+    }
+
+    .footer{
+        position: absolute;
+        bottom: 8px;
     }
 
     
